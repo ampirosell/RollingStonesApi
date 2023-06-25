@@ -1,7 +1,7 @@
 <?php
 require_once('models/Song.model.php');
 require_once('models/album.model.php');
-require_once("./api/json.view.php");
+require_once("json.view.php");
 
 class songApiController {
     protected $songModel;
@@ -12,7 +12,7 @@ class songApiController {
     public function __construct() {
         $this->view = new JSONView();
         $this->data = file_get_contents("php://input"); 
-        $this->model = new songModel();
+        $this->songModel = new songModel();
     }
 
     function getData(){ 
@@ -47,7 +47,7 @@ class songApiController {
    
     public function deleteSong($params = []) {
         $song_id = $params[':ID'];
-        $song = $this->model->getSong($song_id);
+        $song = $this->songModel->getSong($song_id);
 
         if ($song) {
             $this->songModel->deleteSongById($song_id);
@@ -59,11 +59,11 @@ class songApiController {
 
 
 
-   public function insertSong($params = []) {     
+   public function insert($params = []) {     
         $song = $this->getData(); // la obtengo del body
 
         // inserta la cancion
-        $newSong = $this->model->insertSong( $song->titulo,$song->id_album);
+        $newSong = $this->songModel->insertSong( $song->title_song,$song->id_album,$song->id_song);
 
         if ($newSong)
             $this->view->response($newSong, 200);
@@ -82,7 +82,7 @@ class songApiController {
             $titulo = $body->titulo;
             $id_album = $body->id_album;
         
-            $cancion = $this->model->ActualizarTarea($song_id, $titulo, $id_album);
+            $cancion = $this->songModel->update($song_id, $titulo, $id_album);
             $this->view->response("Cancion id=$song_id actualizada con éxito", 200);
         }
         else 

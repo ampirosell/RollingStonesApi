@@ -25,19 +25,15 @@ class songModel {
         $query=$this->db->prepare("DELETE from `songs` WHERE id_song= ? ");
         $query->execute([$id]);        
     }
-    public function getSelect(){
-        $sentencia = $this->db->prepare("SELECT * FROM `albums`");
-        $sentencia->execute();
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }
 
-    public function insertSong($song,$album_id){
-        $query=$this->db->prepare("INSERT INTO `songs` (  `title_song`, `id_album`) VALUES(?,?)");
-        $query->execute(array($song,$album_id));
+
+    public function insertSong($title_song,$album_id,$id_song){
+        $query=$this->db->prepare("INSERT INTO `songs` (  `title_song`, `id_album`,`id_song`) VALUES(?,?,?)");
+        $query->execute(array($title_song,$album_id,$id_song));
         return $this->db->lastInsertId();
     }
 
-    public function update($title,$newId, $id){
+    public function updateSong($title,$newId, $id){
         $query=$this->db->prepare("UPDATE `songs` SET `title_song`= ?  WHERE id_song=?");
         $query->execute(array($title,$id)); 
         $query=$this->db->prepare("UPDATE `songs` SET `id_album` = ? WHERE `title_song` = ?");
