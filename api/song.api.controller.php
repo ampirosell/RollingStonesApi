@@ -60,11 +60,14 @@ class songApiController {
 
 
    public function insert($params = []) {     
-        $song = $this->getData(); // la obtengo del body
+        $body = $this->getData(); // la obtengo del body
+        $id_song=$body->id_song;
+        $id_album=$body->id_album;
+        $title=$body->title_song;
 
         // inserta la cancion
-        $newSong = $this->songModel->insertSong( $song->title_song,$song->id_album,$song->id_song);
-
+        $newSong = $this->songModel->insertSong( $id_song,$id_album,$title);
+           
         if ($newSong)
             $this->view->response($newSong, 200);
         else
@@ -79,10 +82,10 @@ class songApiController {
 
         if ($song) {
             $body = $this->getData();
-            $titulo = $body->titulo;
+            $titulo = $body->title_song;
             $id_album = $body->id_album;
         
-            $cancion = $this->songModel->update($song_id, $titulo, $id_album);
+            $this->songModel->updateSong( $titulo, $id_album,$song_id);
             $this->view->response("Cancion id=$song_id actualizada con éxito", 200);
         }
         else 

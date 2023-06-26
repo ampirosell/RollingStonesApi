@@ -27,15 +27,15 @@ class songModel {
     }
 
 
-    public function insertSong($title_song,$album_id,$id_song){
-        $query=$this->db->prepare("INSERT INTO `songs` (  `title_song`, `id_album`,`id_song`) VALUES(?,?,?)");
-        $query->execute(array($title_song,$album_id,$id_song));
+    public function insertSong($id_song, $album_id, $title_song) {
+        $query = $this->db->prepare("INSERT INTO `songs` (`id_song`, `id_album`, `title_song`) VALUES (?, ?, ?)");
+        $query->execute(array($id_song, $album_id, $title_song));
         return $this->db->lastInsertId();
     }
 
-    public function updateSong($title,$newId, $id){
+    public function updateSong($title,$newId,$song_id){
         $query=$this->db->prepare("UPDATE `songs` SET `title_song`= ?  WHERE id_song=?");
-        $query->execute(array($title,$id)); 
+        $query->execute(array($title,$song_id)); 
         $query=$this->db->prepare("UPDATE `songs` SET `id_album` = ? WHERE `title_song` = ?");
         $query->execute(array($newId,$title));
         return $query->fetch(PDO::FETCH_OBJ);
