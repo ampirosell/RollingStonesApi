@@ -10,9 +10,9 @@
     
 
     $router = new Router();
-
+    $router->addRoute("/all", "GET", "songApiController","getAll");
     // rutas songs
-    $router->addRoute("/songs", "GET", "songApiController", "getAll");
+    $router->addRoute("/songs", "GET", "songApiController", "getAllSongs");
     $router->addRoute("/songs/:ID", "GET", "songApiController", "getSong");
     $router->addRoute("/songs/:ID", "DELETE", "songApiController", "deleteSong");
     $router->addRoute("/songs", "POST", "songApiController", "insert");

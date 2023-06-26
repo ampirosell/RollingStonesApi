@@ -5,6 +5,7 @@ require_once("json.view.php");
 
 class songApiController {
     protected $songModel;
+    protected $albumModel;
     protected $view;
     private $data; 
 
@@ -13,6 +14,7 @@ class songApiController {
         $this->view = new JSONView();
         $this->data = file_get_contents("php://input"); 
         $this->songModel = new songModel();
+        $this->albumModel = new albumModel();
     }
 
     function getData(){ 
@@ -21,9 +23,15 @@ class songApiController {
 
 
   
-    public function getAll($params = null) {
+    public function getAllSongs($params = null) {
         $songs = $this->songModel->getSongs();
         $this->view->response($songs, 200);
+    }
+    public function getAll($params = null){
+        $songs = $this->songModel->getSongs();
+        $albums= $this ->albumModel->getAllAlbums();
+        $all=array($albums, $songs);
+        $this->view->response($all, 200);
     }
 
     /**
