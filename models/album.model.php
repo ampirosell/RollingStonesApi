@@ -20,9 +20,9 @@ class AlbumModel{
         $query->execute(array($id_album));
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
-    public function insertAlbum($title_album,$year_release,$img_cover=' '){
-        $query = $this->db->prepare("INSERT INTO `albums`  ( `titulo_album` ,`year_release` , `img_cover` ) VALUES (?,?,?)");
-        $query->execute(array($title_album,$year_release,$img_cover));
+    public function insertAlbum($id_album,$title,$year,$img){
+        $query = $this->db->prepare("INSERT INTO `albums`  ( `id_album`,`titulo_album` ,`year_release` , `img_cover` ) VALUES (?,?,?,?)");
+        $query->execute(array($id_album,$title,$year,$img));
         return $this->db->lastInsertId();
     }
     public function deleteAlbumById($id){
@@ -31,9 +31,9 @@ class AlbumModel{
         $query->execute([$id]);
         $query2->execute([$id]);
     }
-    public function updateA($id,$newTitleAlbum,$newYearAlbum, $newImgAlbum){
+    public function updateAlbum($title, $year, $img,$album_id){
         $query=$this->db->prepare("UPDATE `albums` SET `titulo_album`=? , `year_release`=? , `img_cover`= ?  WHERE id_album= ?");
-        $query->execute(array($newTitleAlbum,$newYearAlbum,$newImgAlbum,$id)); 
+        $query->execute(array( $title, $year, $img,$album_id)); 
         return $query->fetch(PDO::FETCH_OBJ);
     }
 }

@@ -86,10 +86,10 @@ class songApiController {
             $id_album = $body->id_album;
         
             $this->songModel->updateSong( $titulo, $id_album,$song_id);
-            $this->view->response("Cancion id=$song_id actualizada con éxito", 200);
+            $this->view->response("Canción id=$song_id actualizada con éxito", 200);
         }
         else 
-            $this->view->response("Task id=$song_id not found", 404);
+            $this->view->response("canción id=$song_id not found", 404);
     }
 
 
