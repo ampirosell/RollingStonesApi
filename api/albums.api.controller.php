@@ -43,6 +43,19 @@ class albumsApiController {
             $this->view->response("No existe la canción con el id={$id}", 404);
         }
     }
+    public function getSongsByAlbum($params = '') {
+        // obtiene el parametro de la ruta
+        $id = $params[':ID'];
+        
+        $song = $this->albumModel->getSongsByAlbumID($id);
+        
+        if ($song) {
+            $this->view->response($song, 200);   
+        } else {
+            $this->view->response("No existe la canción con el id={$id}", 404);
+        }
+    }
+    
 
    
     public function deleteAlbum($params = []) {
