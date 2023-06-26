@@ -3,6 +3,7 @@
     require_once('libs/Router.php');
     //aca requiere el controlador
     require_once('api/albums.api.controller.php');
+    require_once('api/song.api.controller.php');
     
     // CONSTANTES PARA RUTEO
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');

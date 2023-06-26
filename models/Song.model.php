@@ -27,9 +27,9 @@ class songModel {
     }
 
 
-    public function insertSong($id_song, $album_id, $title_song) {
-        $query = $this->db->prepare("INSERT INTO `songs` (`id_song`, `id_album`, `title_song`) VALUES (?, ?, ?)");
-        $query->execute(array($id_song, $album_id, $title_song));
+    public function insertSong( $album_id, $title_song) {
+        $query = $this->db->prepare("INSERT INTO `songs` ( `id_album`, `title_song`) VALUES (?, ?)");
+        $query->execute(array( $album_id, $title_song));
         return $this->db->lastInsertId();
     }
 

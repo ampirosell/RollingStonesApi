@@ -20,9 +20,9 @@ class AlbumModel{
         $query->execute(array($id_album));
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
-    public function insertAlbum($id_album,$title,$year,$img){
-        $query = $this->db->prepare("INSERT INTO `albums`  ( `id_album`,`titulo_album` ,`year_release` , `img_cover` ) VALUES (?,?,?,?)");
-        $query->execute(array($id_album,$title,$year,$img));
+    public function insertAlbum($title,$year,$img){
+        $query = $this->db->prepare("INSERT INTO `albums`  ( `titulo_album` ,`year_release` , `img_cover` ) VALUES (?,?,?)");
+        $query->execute(array($title,$year,$img));
         return $this->db->lastInsertId();
     }
     public function deleteAlbumById($id){

@@ -61,12 +61,11 @@ class songApiController {
 
    public function insert($params = []) {     
         $body = $this->getData(); // la obtengo del body
-        $id_song=$body->id_song;
         $id_album=$body->id_album;
         $title=$body->title_song;
 
         // inserta la cancion
-        $newSong = $this->songModel->insertSong( $id_song,$id_album,$title);
+        $newSong = $this->songModel->insertSong($id_album,$title);
            
         if ($newSong)
             $this->view->response($newSong, 200);

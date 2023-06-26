@@ -61,13 +61,14 @@ class albumsApiController {
 
    public function addAlbum($params = []) {     
         $body = $this->getData(); // la obtengo del body
-        $id_album=$body->id_album;
+       
         $title=$body->titulo_album;
         $year=$body->year_release;
         $img=$body->img_cover;
 
         // inserta la cancion
-        $newAlbum = $this->albumModel->insertAlbum( $id_album,$title,$year,$img);
+        $newAlbum = $this->albumModel->insertAlbum( $title,$year,$img);
+    
            
         if ($newAlbum)
             $this->view->response($newAlbum, 200);
