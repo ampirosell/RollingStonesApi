@@ -41,7 +41,15 @@ class songModel {
         return $query->fetch(PDO::FETCH_OBJ);
     }
     public function getCanciones($sort, $order) {
-        $query = $this->db->prepare('SELECT * FROM `songs` ORDER BY ' . $sort . ' ' . $order);
+        if(isset($order)&&isset($sort)&&!empty($order)&&!empty($sort)){
+            $query = $this->db->prepare('SELECT * FROM `songs` ORDER BY ' . $sort . ' ' . $order);
+        }
+        else if (isset($sort)&&!empty($sort)&&(empty($order)||!isset($order))){
+            $query = $this->db->prepare('SELECT * FROM `songs` ORDER BY '.$sort.' ASC');
+        }
+        else{
+            $query = $this->db->prepare('SELECT * FROM songs ');
+        }
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }

@@ -24,7 +24,6 @@ class songApiController {
 
   
     public function getAllSongs($params = null) {
-        $this->ordenarCanciones();
         $songs = $this->songModel->getSongs();
         $this->view->response($songs, 200);
     }
@@ -104,8 +103,8 @@ class songApiController {
     }
 
     public function ordenarCanciones(){
-        $sort = ' '; 
-        $order = ' ';
+        $sort = ''; 
+        $order = '';
         if(isset($_GET['order'])&&isset($_GET['sort'])) {
             $sort = $_GET['sort'];
             $order = $_GET['order'];
@@ -113,7 +112,7 @@ class songApiController {
             $this->view->response($canciones,200);  
         } 
         else {
-            $sort='*';
+            $sort='';
             $canciones=$this->songModel->getCanciones($sort,$order);
             $this->view->response($canciones,200);
         }

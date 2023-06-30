@@ -2,7 +2,7 @@
 require_once ('./models/user.model.php');
 
 class AuthHelper {
-    private $secretKey = 'segundo_francia'; //cambiar
+    private $secretKey = 'exito_prosperidad'; //Éxito y prosperidad más allá de egos, 60 años de los rolling stones
     private $usuario;
     private $userModel;
 

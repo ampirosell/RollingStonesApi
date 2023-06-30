@@ -23,7 +23,10 @@ class albumsApiController {
   
     public function getAll($params = null) {
         $songs = $this->albumModel->getAllAlbums();
-        $this->view->response($songs, 200);
+        if($songs)
+            $this->view->response($songs, 200);
+        else 
+            $this->view->response('No existen albumes ni canciones', 404);
     }
 
     /**
@@ -40,7 +43,7 @@ class albumsApiController {
         if ($song) {
             $this->view->response($song, 200);   
         } else {
-            $this->view->response("No existe la canción con el id={$id}", 404);
+            $this->view->response("No existe el album con el id={$id}", 404);
         }
     }
     public function getSongsByAlbum($params = '') {
@@ -52,7 +55,7 @@ class albumsApiController {
         if ($song) {
             $this->view->response($song, 200);   
         } else {
-            $this->view->response("No existe la canción con el id={$id}", 404);
+            $this->view->response("No existe el album con el id={$id}", 404);
         }
     }
     
@@ -65,7 +68,7 @@ class albumsApiController {
 
         if ($album) {
             $this->albumModel->deleteAlbumById($album_id);
-            $this->view->response("album id=$album_id eliminad0 con éxito", 200);
+            $this->view->response("album id=$album_id eliminado con éxito", 200);
         }
         else 
             $this->view->response("album id=$album_id not found", 404);
@@ -75,24 +78,19 @@ class albumsApiController {
 
     public function addAlbum($params = []) {    
         $this->esAdministrador();
-        $body = $this->getData(); // la obtengo del body
-       
+        $body = $this->getData();
         $title=$body->titulo_album;
         $year=$body->year_release;
         $img=$body->img_cover;
 
-        // inserta la cancion
         $newAlbum = $this->albumModel->insertAlbum( $title,$year,$img);
-    
-           
+       
         if ($newAlbum)
-            $this->view->response($newAlbum, 200);
+            $this->view->response("album nuevo de id=$newAlbum", 200);
         else
             $this->view->response("Error al insertar Album", 500);
-
     }
 
-   
     public function updateAlbum($params = []) {
         $this->esAdministrador();
         $album_id = $params[':ID'];
@@ -112,8 +110,8 @@ class albumsApiController {
     }
     
     public function ordenarAlbums(){
-        $sort = ' '; 
-        $order = ' ';
+        $sort = ''; 
+        $order = '';
         if(isset($_GET['order'])&&isset($_GET['sort'])) {
             $sort = $_GET['sort'];
             $order = $_GET['order'];
@@ -121,7 +119,7 @@ class albumsApiController {
             $this->view->response($canciones,200);  
         } 
         else {
-            $sort='*';
+            $sort='';
             $canciones=$this->albumModel->getAlbums($sort,$order);
             $this->view->response($canciones,200);
         }
