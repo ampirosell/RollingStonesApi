@@ -40,6 +40,15 @@ class songModel {
         $query->execute(array($newId,$title));
         return $query->fetch(PDO::FETCH_OBJ);
     }
-    
+    public function getCanciones($sort, $order) {
+        $query = $this->db->prepare('SELECT * FROM `songs` ORDER BY ' . $sort . ' ' . $order);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function paginar($pagina,$limite){
+        $query=$this->db->prepare('SELECT * FROM `songs` ORDER BY id_song LIMIT '.$pagina.' , '. $limite);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
 }
 ?>

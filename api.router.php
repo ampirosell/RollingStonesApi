@@ -13,6 +13,9 @@
     $router->addRoute("/all", "GET", "songApiController","getAll");
     // rutas songs
     $router->addRoute("/songs", "GET", "songApiController", "getAllSongs");
+    $router->addRoute("/songsOrder", "GET", "songApiController", "ordenarCanciones");
+    $router->addRoute("/songsPag", "GET", "songApiController", "paginacion");
+
     $router->addRoute("/songs/:ID", "GET", "songApiController", "getSong");
     $router->addRoute("/songs/:ID", "DELETE", "songApiController", "deleteSong");
     $router->addRoute("/songs", "POST", "songApiController", "insert");

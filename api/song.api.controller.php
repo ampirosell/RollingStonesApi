@@ -24,6 +24,7 @@ class songApiController {
 
   
     public function getAllSongs($params = null) {
+        $this->ordenarCanciones();
         $songs = $this->songModel->getSongs();
         $this->view->response($songs, 200);
     }
@@ -99,7 +100,33 @@ class songApiController {
             $this->view->response("canción id=$song_id not found", 404);
     }
 
-
+    public function ordenarCanciones(){
+        $sort = ' '; 
+        $order = ' ';
+        if(isset($_GET['order'])&&isset($_GET['sort'])) {
+            $sort = $_GET['sort'];
+            $order = $_GET['order'];
+            $canciones=$this->songModel->getCanciones($sort,$order);
+            $this->view->response($canciones,200);  
+        } 
+        else {
+            $sort='*';
+            $canciones=$this->songModel->getCanciones($sort,$order);
+            $this->view->response($canciones,200);
+        }
+    }
+    public function paginacion(){
+        $pagina=0;
+        $limite=10;
+        if (isset($_GET['pagina'])&&isset($_GET['limite'])) {
+            $limite=$_GET['limite'];
+            $pagina=$pagina + $limite*($_GET['pagina']-1);
+            if(($pagina>0)&&($limite>0)){
+                $cancionesPaginadas=$this->songModel->paginar($pagina,$limite);
+                $this->view->response($cancionesPaginadas,200);
+            }
+        }else{
+            $this->view->response('No se ha especificado la página',400);
+        }
+    }
 }
-
-
