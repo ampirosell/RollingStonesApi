@@ -22,6 +22,8 @@
     $router->addRoute("/songs/:ID", "PUT", "songApiController", "updateSong");
     //rutas album
     $router->addRoute("/albums", "GET", "albumsApiController", "getAll");
+    $router->addRoute("/albumsOrder", "GET", "albumsApiController", "ordenarAlbums");
+    $router->addRoute("/albumsPag", "GET", "albumsApiController", "paginacion");
     $router->addRoute("/albums/:ID", "GET", "albumsApiController", "getAlbum");
     $router->addRoute("/songsAlbum/:ID", "GET", "albumsApiController", "getSongsByAlbum");
     $router->addRoute("/albums/:ID", "DELETE", "albumsApiController", "deleteAlbum");
