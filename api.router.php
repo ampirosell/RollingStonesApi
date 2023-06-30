@@ -4,6 +4,7 @@
     //aca requiere el controlador
     require_once('api/albums.api.controller.php');
     require_once('api/song.api.controller.php');
+    require_once('api/user.controller.php');
     
     // CONSTANTES PARA RUTEO
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
@@ -29,6 +30,10 @@
     $router->addRoute("/albums/:ID", "DELETE", "albumsApiController", "deleteAlbum");
     $router->addRoute("/albums", "POST", "albumsApiController", "addAlbum");
     $router->addRoute("/albums/:ID", "PUT", "albumsApiController", "updateAlbum");
+
+
+    //token
+    $router->addRoute("/login","POST","UserController","login");
 
     //run
     $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);
