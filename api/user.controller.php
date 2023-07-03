@@ -32,19 +32,20 @@ class UserController
 
     public function login(){
         
-        $datos = $this->getData(); //asi o con metodo get/post?
+        $datos = $this->getData(); 
         $username = $datos->username;
         $password = $datos->password;
 
-        //aca no los agarra
         if (empty($username) || empty($password)) {
             $this->view->response("Debe indicar el nombre de usuario y la contraseña.", 400);
             return;
         }
         $usuario = $this->userModel->comprobarUsuario($username, $password);
         if ($usuario) {
-            $aut = new AuthHelper();
-            $token = $aut->getToken($usuario);
+            $aut= new AuthHelper();
+            $token=$aut->getToken($usuario);
+            //$aut = new AuthHelper();
+            //$token = $aut->getToken($usuario);
             $this->view->response($token, 200);
         } else {
             $this->view->response("Usuario o contraseña incorrecta.", 400);

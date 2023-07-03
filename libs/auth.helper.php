@@ -19,7 +19,6 @@ class AuthHelper {
         $token = $params[1];
         $idUsuario = $this->comprobarToken($token);
         if ($idUsuario) {
-
             return true;
         } else
             return false;
@@ -56,7 +55,6 @@ class AuthHelper {
         [$header, $payload, $signature] = explode('.', $token);
 
         // Decodifica el encabezado y el payload
-//        $headerData = json_decode(base64_decode($header), true);
         $payloadData = json_decode(base64_decode($payload), true);
 
         // Verifica la firma del token

@@ -62,7 +62,7 @@ class albumsApiController {
 
    
     public function deleteAlbum($params = []) {
-        $this->esAdministrador();
+        $this->checkLoggedIn();
         $album_id = $params[':ID'];
         $album = $this->albumModel->getOneAlbum($album_id);
 
@@ -77,7 +77,7 @@ class albumsApiController {
 
 
     public function addAlbum($params = []) {    
-        $this->esAdministrador();
+        $this->checkLoggedIn();
         $body = $this->getData();
         $title=$body->titulo_album;
         $year=$body->year_release;
@@ -92,7 +92,7 @@ class albumsApiController {
     }
 
     public function updateAlbum($params = []) {
-        $this->esAdministrador();
+        $this->checkLoggedIn();
         $album_id = $params[':ID'];
         $album = $this->albumModel->getOneAlbum($album_id);
         
@@ -138,9 +138,8 @@ class albumsApiController {
             $this->view->response('No se ha especificado la página',400);
         }
     }
-    private function esAdministrador()
-    {
-        $aut = new AuthHelper();
+    private function checkLoggedIn(){
+        $aut=new AuthHelper();
         if (!$aut->validarPermisos() ) {
             $this->view->response("No posee permisos para realizar esta accion.", 401);
             die();

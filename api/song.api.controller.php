@@ -54,7 +54,7 @@ class songApiController {
 
    
     public function deleteSong($params = []) {
-        $this->esAdministrador();
+        $this->checkLoggedIn();
         $song_id = $params[':ID'];
         $song = $this->songModel->getSong($song_id);
 
@@ -69,7 +69,7 @@ class songApiController {
 
 
    public function insert($params = []) { 
-        $this->esAdministrador();
+        $this->checkLoggedIn();
         $body = $this->getData(); // la obtengo del body
         $id_album=$body->id_album;
         $title=$body->title_song;
@@ -86,7 +86,7 @@ class songApiController {
 
    
     public function updateSong($params = []) {
-        $this->esAdministrador();
+        $this->checkLoggedIn();
         $song_id = $params[':ID'];
         $song = $this->songModel->getSong($song_id);
 
@@ -131,9 +131,8 @@ class songApiController {
             $this->view->response('No se ha especificado la página',400);
         }
     }
-    private function esAdministrador()
-    {
-        $aut = new AuthHelper();
+    private function checkLoggedIn(){
+        $aut=new AuthHelper();
         if (!$aut->validarPermisos()) {
             $this->view->response("No posee permisos para realizar esta accion.", 401);
             die();
