@@ -21,7 +21,7 @@ class albumsApiController {
 
 
   
-    public function getAll($params = null) {
+    public function getAllAlbums($params = null) {
         $songs = $this->albumModel->getAllAlbums();
         if($songs)
             $this->view->response($songs, 200);
@@ -38,24 +38,24 @@ class albumsApiController {
         // obtiene el parametro de la ruta
         $id = $params[':ID'];
         
-        $song = $this->albumModel->getOneAlbum($id);
+        $album = $this->albumModel->getOneAlbum($id);
         
-        if ($song) {
-            $this->view->response($song, 200);   
+        if ($album) {
+            $this->view->response($album, 200);   
         } else {
-            $this->view->response("No existe el album con el id={$id}", 404);
+            $this->view->response("No existe el album con el id={$id}", 400);
         }
     }
     public function getSongsByAlbum($params = '') {
         // obtiene el parametro de la ruta
         $id = $params[':ID'];
         
-        $song = $this->albumModel->getSongsByAlbumID($id);
+        $songs = $this->albumModel->getSongsByAlbumID($id);
         
-        if ($song) {
-            $this->view->response($song, 200);   
+        if ($songs) {
+            $this->view->response($songs, 200);   
         } else {
-            $this->view->response("No existe el album con el id={$id}", 404);
+            $this->view->response("No existe el album con el id={$id}", 400);
         }
     }
     
@@ -86,7 +86,7 @@ class albumsApiController {
         $newAlbum = $this->albumModel->insertAlbum( $title,$year,$img);
        
         if ($newAlbum)
-            $this->view->response("album nuevo de id=$newAlbum", 200);
+            $this->view->response("album nuevo de id=$newAlbum", 201);
         else
             $this->view->response("Error al insertar Album", 500);
     }
@@ -110,20 +110,32 @@ class albumsApiController {
     }
     
     public function ordenarAlbums(){
-        $sort = ''; 
-        $order = '';
-        if(isset($_GET['order'])&&isset($_GET['sort'])) {
+        $sort='';
+        if(isset($_GET['sort']))
             $sort = $_GET['sort'];
+        $order='';
+        if (isset($_GET['order']))
             $order = $_GET['order'];
-            $canciones=$this->albumModel->getAlbums($sort,$order);
-            $this->view->response($canciones,200);  
-        } 
+        if(!empty($sort)&&!empty($order)){
+            $albums=$this->albumModel->getAlbums($sort,$order);
+            $this->view->response($albums,200);  
+        }
+        else if(!empty($sort)&&empty($order)){
+            $order="DESC";
+            $albums=$this->albumModel->getAlbums($sort,$order);
+            $this->view->response($albums,200);  
+        }
+        else if(empty($sort)&&!empty($order)){
+            $sort='id_album';
+            $albums=$this->albumModel->getAlbums($sort,$order);
+            $this->view->response($albums,200);  
+        }
         else {
-            $sort='';
-            $canciones=$this->albumModel->getAlbums($sort,$order);
-            $this->view->response($canciones,200);
+            $albums=$this->getAllAlbums();
+            $this->view->response($albums,200);
         }
     }
+    
     public function paginacion(){
         $pagina=0;
         $limite=10;

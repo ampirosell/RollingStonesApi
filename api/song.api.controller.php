@@ -23,9 +23,13 @@ class songApiController {
 
 
   
-    public function getAllSongs($params = null) {
+    public function getAllSongs() {
         $songs = $this->songModel->getSongs();
-        $this->view->response($songs, 200);
+        if ($songs) {
+            $this->view->response($songs, 200);   
+        } else {
+            $this->view->response("No existen canciones con el id={$id}", 400);
+        }
     }
     public function getAll($params = null){
         $songs = $this->songModel->getSongs();
@@ -48,7 +52,7 @@ class songApiController {
         if ($song) {
             $this->view->response($song, 200);   
         } else {
-            $this->view->response("No existe la canción con el id={$id}", 404);
+            $this->view->response("No existe la canción con el id={$id}", 400);
         }
     }
 
@@ -78,7 +82,7 @@ class songApiController {
         $newSong = $this->songModel->insertSong($id_album,$title);
            
         if ($newSong)
-            $this->view->response($newSong, 200);
+            $this->view->response($newSong, 201);
         else
             $this->view->response("Error al insertar canción", 500);
 
@@ -103,17 +107,29 @@ class songApiController {
     }
 
     public function ordenarCanciones(){
-        $sort = ''; 
-        $order = '';
-        if(isset($_GET['order'])&&isset($_GET['sort'])) {
+        $sort='';
+        if(isset($_GET['sort']))
             $sort = $_GET['sort'];
+        $order='';
+        if (isset($_GET['order']))
             $order = $_GET['order'];
+        if(!empty($sort)&&!empty($order)){
             $canciones=$this->songModel->getCanciones($sort,$order);
             $this->view->response($canciones,200);  
-        } 
-        else {
-            $sort='';
+        }
+        else if(!empty($sort)&&empty($order)){
+            $order="DESC";
             $canciones=$this->songModel->getCanciones($sort,$order);
+            $this->view->response($canciones,200);  
+        }
+        else if(empty($sort)&&!empty($order)){
+            $sort='id_song';
+            $canciones=$this->songModel->getCanciones($sort,$order);
+            $this->view->response($canciones,200);  
+        }
+         
+        else {
+            $canciones=$this->getAllSongs();
             $this->view->response($canciones,200);
         }
     }

@@ -13,22 +13,15 @@ GET /all
 Endpoint: /songs
 Método: GET
 Controlador: songApiController
-Método del controlador: getAllSongs
-Descripción: Este endpoint devuelve todos los registros de canciones de la base de datos.
-Uso: Puede utilizarse para obtener una lista de todas las canciones disponibles en la API.
-
-Ejemplo de uso:
-GET /songs
-
-Endpoint: /songsOrder
-Método: GET
-Controlador: songApiController
 Método del controlador: ordenarCanciones
 Descripción: Este endpoint devuelve todos los registros de canciones de la base de datos ordenados.
-Uso: Puede utilizarse para obtener una lista de todas las canciones disponibles en la API, ordenadas según un criterio específico.
+Uso: Puede utilizarse para obtener una lista de todas las canciones disponibles en la API, ordenadas según un criterio específico. Puede utilizarse sin order, ni sort, o con unicamente uno de los dos parametros, de ser así nos devuelve la lista ordenada DESC; o por id_song; u ordenada ASC por id_song.
 
 Ejemplo de uso:
-GET /songsOrder?order=DESC&sort=title_song
+GET /songs?order=DESC&sort=title_song
+GET /songs?order=DESC
+GET /songs?sort=title_song
+GET /songs
 
 Endpoint: /songsPag
 Método: GET
@@ -83,22 +76,15 @@ PUT /songs/1
 Endpoint: /albums
 Método: GET
 Controlador: albumsApiController
-Método del controlador: getAll
-Descripción: Este endpoint devuelve todos los registros de álbumes de la base de datos.
-Uso: Puede utilizarse para obtener una lista de todos los álbumes disponibles en la API.
-
-Ejemplo de uso:
-GET /albums
-
-Endpoint: /albumsOrder
-Método: GET
-Controlador: albumsApiController
 Método del controlador: ordenarAlbums
 Descripción: Este endpoint devuelve todos los registros de álbumes de la base de datos ordenados.
-Uso: Puede utilizarse para obtener una lista de todos los álbumes disponibles en la API, ordenados según un criterio específico.
+Uso: Puede utilizarse para obtener una lista de todos los álbumes disponibles en la API, ordenados según un criterio específico. Puede utilizarse sin order, ni sort, o con unicamente uno de los dos parametros, de ser así nos devuelve la lista ordenada DESC; o por id_album; u ordenada ASC por id_album.
 
 Ejemplo de uso:
-GET /albumsOrder?sort=id_album&order=ASC
+GET /albums?sort=id_album&order=DESC
+GET /albums?order=ASC
+GET /albums?sort=titulo_album
+GET /albums
 
 Endpoint: /albumsPag
 Método: GET
@@ -182,5 +168,6 @@ BODY:
 "username":"amparorosell",
 "password":"987654321"
 }
+
 Ejemplo de uso:
 POST /login
