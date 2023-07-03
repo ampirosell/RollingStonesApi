@@ -9,8 +9,8 @@
     // CONSTANTES PARA RUTEO
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
     
-
     $router = new Router();
+
     $router->addRoute("/all", "GET", "songApiController","getAll");
     // rutas songs
     $router->addRoute("/songs", "GET", "songApiController", "getAllSongs");
@@ -30,7 +30,6 @@
     $router->addRoute("/albums/:ID", "DELETE", "albumsApiController", "deleteAlbum");
     $router->addRoute("/albums", "POST", "albumsApiController", "addAlbum");
     $router->addRoute("/albums/:ID", "PUT", "albumsApiController", "updateAlbum");
-
 
     //token
     $router->addRoute("/login","POST","UserController","login");

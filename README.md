@@ -1,5 +1,4 @@
 # RollingStonesApi
-
 Endpoint: /all
 Método: GET
 Controlador: songApiController
@@ -19,6 +18,26 @@ Uso: Puede utilizarse para obtener una lista de todas las canciones disponibles 
 
 Ejemplo de uso:
 GET /songs
+
+Endpoint: /songsOrder
+Método: GET
+Controlador: songApiController
+Método del controlador: ordenarCanciones
+Descripción: Este endpoint devuelve todos los registros de canciones de la base de datos ordenados.
+Uso: Puede utilizarse para obtener una lista de todas las canciones disponibles en la API, ordenadas según un criterio específico.
+
+Ejemplo de uso:
+GET /songsOrder?order=DESC&sort=title_song
+
+Endpoint: /songsPag
+Método: GET
+Controlador: songApiController
+Método del controlador: paginacion
+Descripción: Este endpoint devuelve una página de registros de canciones de la base de datos.
+Uso: Puede utilizarse para obtener una lista paginada de canciones disponibles en la API.
+
+Ejemplo de uso:
+GET /songsPag?pagina=2&limite=8
 
 Endpoint: /songs/:ID
 Método: GET
@@ -44,23 +63,21 @@ Endpoint: /songs
 Método: POST
 Controlador: songApiController
 Método del controlador: insert
-Descripción: Este endpoint permite insertar una nueva canción en la base de datos.
-Uso: Puede utilizarse para agregar una nueva canción a la API.
+Descripción: Este endpoint agrega una nueva canción a la base de datos.
+Uso: Puede utilizarse para insertar una nueva canción en la API.
 
 Ejemplo de uso:
 POST /songs
-Body: { "title": "Canción nueva", "artist": "Artista nuevo" }
 
 Endpoint: /songs/:ID
 Método: PUT
 Controlador: songApiController
 Método del controlador: updateSong
-Descripción: Este endpoint actualiza una canción específica según el ID proporcionado.
-Uso: Puede utilizarse para modificar los detalles de una canción existente.
+Descripción: Este endpoint actualiza los detalles de una canción específica según el ID proporcionado.
+Uso: Puede utilizarse para actualizar la información de una canción en la base de datos.
 
 Ejemplo de uso:
 PUT /songs/1
-Body: { "title": "Nuevo título" }
 
 Endpoint: /albums
 Método: GET
@@ -71,6 +88,26 @@ Uso: Puede utilizarse para obtener una lista de todos los álbumes disponibles e
 
 Ejemplo de uso:
 GET /albums
+
+Endpoint: /albumsOrder
+Método: GET
+Controlador: albumsApiController
+Método del controlador: ordenarAlbums
+Descripción: Este endpoint devuelve todos los registros de álbumes de la base de datos ordenados.
+Uso: Puede utilizarse para obtener una lista de todos los álbumes disponibles en la API, ordenados según un criterio específico.
+
+Ejemplo de uso:
+GET /albumsOrder?sort=id_album&order=ASC
+
+Endpoint: /albumsPag
+Método: GET
+Controlador: albumsApiController
+Método del controlador: paginacion
+Descripción: Este endpoint devuelve una página de registros de álbumes de la base de datos.
+Uso: Puede utilizarse para obtener una lista paginada de álbumes disponibles en la API con un límite determinado de albums por página.
+
+Ejemplo de uso:
+GET /albumsPag?pagina=3&limite=10
 
 Endpoint: /albums/:ID
 Método: GET
@@ -106,20 +143,28 @@ Endpoint: /albums
 Método: POST
 Controlador: albumsApiController
 Método del controlador: addAlbum
-Descripción: Este endpoint permite agregar un nuevo álbum a la base de datos.
+Descripción: Este endpoint agrega un nuevo álbum a la base de datos.
 Uso: Puede utilizarse para insertar un nuevo álbum en la API.
 
 Ejemplo de uso:
 POST /albums
-Body: { "title": "Nuevo álbum", "artist": "Artista nuevo" }
 
 Endpoint: /albums/:ID
 Método: PUT
 Controlador: albumsApiController
 Método del controlador: updateAlbum
-Descripción: Este endpoint actualiza un álbum específico según el ID proporcionado.
-Uso: Puede utilizarse para modificar los detalles de un álbum existente.
+Descripción: Este endpoint actualiza los detalles de un álbum específico según el ID proporcionado.
+Uso: Puede utilizarse para actualizar la información de un álbum en la base de datos.
 
 Ejemplo de uso:
 PUT /albums/1
-Body: { "title": "Nuevo título" }
+
+Endpoint: /login
+Método: POST
+Controlador: UserController
+Método del controlador: login
+Descripción: Este endpoint permite a un usuario iniciar sesión y obtener un token de autenticación.
+Uso: Puede utilizarse para autenticar a un usuario en la API.
+
+Ejemplo de uso:
+POST /login
