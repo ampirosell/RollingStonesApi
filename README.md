@@ -1,4 +1,5 @@
 # RollingStonesApi
+
 Endpoint: /all
 Método: GET
 Controlador: songApiController
@@ -163,8 +164,23 @@ Endpoint: /login
 Método: POST
 Controlador: UserController
 Método del controlador: login
-Descripción: Este endpoint permite a un usuario iniciar sesión y obtener un token de autenticación.
+Descripción: Este endpoint permite a un usuario iniciar sesión, completando los datos en el body, y obtener un token de autenticación.
 Uso: Puede utilizarse para autenticar a un usuario en la API.
 
+BODY:
+{
+"username":"admin",
+"password":"admin"
+}
+||
+{
+"username":"vanaina",
+"password":"123456"
+}
+||
+{
+"username":"amparorosell",
+"password":"987654321"
+}
 Ejemplo de uso:
 POST /login
