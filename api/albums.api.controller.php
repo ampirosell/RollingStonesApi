@@ -21,12 +21,12 @@ class albumsApiController {
 
 
   
-    public function getAllAlbums($params = null) {
-        $songs = $this->albumModel->getAllAlbums();
-        if($songs)
-            $this->view->response($songs, 200);
+    public function getAllAlbums() {
+        $albums = $this->albumModel->getAllAlbums();
+        if($albums)
+            $this->view->response($albums, 200);
         else 
-            $this->view->response('No existen albumes ni canciones', 404);
+            $this->view->response('No existen albumes', 404);
     }
 
     /**
@@ -58,8 +58,6 @@ class albumsApiController {
             $this->view->response("No existe el album con el id={$id}", 400);
         }
     }
-    
-
    
     public function deleteAlbum($params = []) {
         $this->checkLoggedIn();
@@ -73,8 +71,6 @@ class albumsApiController {
         else 
             $this->view->response("album id=$album_id not found", 404);
     }
-
-
 
     public function addAlbum($params = []) {    
         $this->checkLoggedIn();
@@ -101,9 +97,12 @@ class albumsApiController {
             $title=$body->titulo_album;
             $year=$body->year_release;
             $img=$body->img_cover;
-        
-            $this->albumModel->updateAlbum($title, $year, $img,$album_id );
-            $this->view->response("album id=$album_id actualizado con éxito", 200);
+                if(!empty($title)&&!empty($year)&&($year>0)){
+                    $this->albumModel->updateAlbum($title, $year, $img,$album_id );
+                    $this->view->response("album id=$album_id actualizado con éxito", 200);
+                }
+                else
+                $this->view->response('Los campos titulo album y año no pueden estar vacios',400);
         }
         else 
             $this->view->response("album id=$album_id not found", 404);
@@ -131,8 +130,11 @@ class albumsApiController {
             $this->view->response($albums,200);  
         }
         else {
-            $albums=$this->getAllAlbums();
-            $this->view->response($albums,200);
+            $albums = $this->albumModel->getAllAlbums();
+            if($albums)
+                $this->view->response($albums, 200);
+            else 
+                $this->view->response('No existen albumes', 404);
         }
     }
     

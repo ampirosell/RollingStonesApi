@@ -28,7 +28,7 @@ class songApiController {
         if ($songs) {
             $this->view->response($songs, 200);   
         } else {
-            $this->view->response("No existen canciones con el id={$id}", 400);
+            $this->view->response("No existen canciones", 400);
         }
     }
     public function getAll($params = null){
@@ -129,8 +129,12 @@ class songApiController {
         }
          
         else {
-            $canciones=$this->getAllSongs();
-            $this->view->response($canciones,200);
+            $songs = $this->songModel->getSongs();
+            if ($songs) {
+                $this->view->response($songs, 200);   
+            } else {
+                $this->view->response("No existen canciones", 400);
+            }
         }
     }
     public function paginacion(){
@@ -150,7 +154,7 @@ class songApiController {
     private function checkLoggedIn(){
         $aut=new AuthHelper();
         if (!$aut->validarPermisos()) {
-            $this->view->response("No posee permisos para realizar esta accion.", 401);
+            $this->view->response("No posee permisos para realizar esta accion.", 400);
             die();
         }
     }
