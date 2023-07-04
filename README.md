@@ -10,7 +10,7 @@
 
 ### Ejemplo de uso:
 
-_GET /all_
+GET /all
 
 ## Endpoint: /songs
 
@@ -22,10 +22,10 @@ _GET /all_
 
 ### Ejemplo de uso:
 
-_GET /songs?order=DESC&sort=title_song_
-_GET /songs?order=DESC_
-_GET /songs?sort=title_song_
-_GET /songs_
+GET /songs?order=DESC&sort=title_song
+GET /songs?order=DESC
+GET /songs?sort=title_song
+GET /songs
 
 ## Endpoint: /songsPag
 
@@ -37,7 +37,7 @@ _GET /songs_
 
 ### Ejemplo de uso:
 
-_GET /songsPag?pagina=2&limite=8_
+GET /songsPag?pagina=2&limite=8
 
 ## Endpoint: /songs/:ID
 
@@ -49,7 +49,7 @@ _GET /songsPag?pagina=2&limite=8_
 
 ### Ejemplo de uso:
 
-_GET /songs/1_
+GET /songs/1
 
 ## Endpoint: /songs/:ID
 
@@ -61,7 +61,7 @@ _GET /songs/1_
 
 ### Ejemplo de uso:
 
-_DELETE /songs/1_
+DELETE /songs/1
 
 ## Endpoint: /songs
 
@@ -73,7 +73,7 @@ _DELETE /songs/1_
 
 ### Ejemplo de uso:
 
-_POST /songs_
+POST /songs
 
 ## Endpoint: /songs/:ID
 
@@ -85,7 +85,7 @@ _POST /songs_
 
 ### Ejemplo de uso:
 
-_PUT /songs/1_
+PUT /songs/1
 
 ## Endpoint: /albums
 
@@ -97,10 +97,10 @@ _PUT /songs/1_
 
 ### Ejemplo de uso:
 
-_GET /albums?sort=id_album&order=DESC_
-_GET /albums?order=ASC_
-_GET /albums?sort=titulo_album_
-_GET /albums_
+GET /albums?sort=id_album&order=DESC
+GET /albums?order=ASC
+GET /albums?sort=titulo_album
+GET /albums
 
 ## Endpoint: /albumsPag
 
@@ -112,7 +112,7 @@ _GET /albums_
 
 ### Ejemplo de uso:
 
-_GET /albumsPag?pagina=3&limite=10_
+GET /albumsPag?pagina=3&limite=10
 
 ## Endpoint: /albums/:ID
 
@@ -124,7 +124,7 @@ _GET /albumsPag?pagina=3&limite=10_
 
 ### Ejemplo de uso:
 
-_GET /albums/1_
+GET /albums/1
 
 ## Endpoint: /songsAlbum/:ID
 
@@ -136,7 +136,7 @@ _GET /albums/1_
 
 ### Ejemplo de uso:
 
-_GET /songsAlbum/1_
+GET /songsAlbum/1
 
 ## Endpoint: /albums/:ID
 
@@ -148,7 +148,7 @@ _GET /songsAlbum/1_
 
 ### Ejemplo de uso:
 
-_DELETE /albums/1_
+DELETE /albums/1
 
 ## Endpoint: /albums
 
@@ -160,7 +160,7 @@ _DELETE /albums/1_
 
 ### Ejemplo de uso:
 
-_POST /albums_
+POST /albums
 
 ## Endpoint: /albums/:ID
 
@@ -172,7 +172,7 @@ _POST /albums_
 
 ### Ejemplo de uso:
 
-_PUT /albums/1_
+PUT /albums/1
 
 ## Endpoint: /login
 
@@ -200,7 +200,7 @@ BODY:
 
 ### Ejemplo de uso:
 
-_POST /login_
+POST /login
 
 # Autoras:
 
