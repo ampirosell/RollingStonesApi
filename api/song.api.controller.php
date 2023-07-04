@@ -77,9 +77,9 @@ class songApiController {
         $body = $this->getData(); // la obtengo del body
         $id_album=$body->id_album;
         $title=$body->title_song;
-
+        if(!empty($id_album)&&!empty($title))
         // inserta la cancion
-        $newSong = $this->songModel->insertSong($id_album,$title);
+            $newSong = $this->songModel->insertSong($id_album,$title);
            
         if ($newSong)
             $this->view->response($newSong, 201);
